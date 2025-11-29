@@ -27,4 +27,9 @@ public class PetitionsController {
         model.addAttribute("result", petitionName);
         return "search";
     }
+
+    @GetMapping("/createPetitions")
+    public String createPetitionsPage() {
+        return "createPetitions";
+    }
 }
