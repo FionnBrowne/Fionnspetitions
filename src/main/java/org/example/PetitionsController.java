@@ -37,4 +37,8 @@ public class PetitionsController {
     public String viewPetitionsPage() {
         return "viewPetitions";
     }
+    @GetMapping("/searchDisplay")
+    public String searchDisplayPage() {
+        return "searchDisplay";
+    }
 }
