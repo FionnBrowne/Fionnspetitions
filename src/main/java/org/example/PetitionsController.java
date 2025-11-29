@@ -32,4 +32,9 @@ public class PetitionsController {
     public String createPetitionsPage() {
         return "createPetitions";
     }
+
+    @GetMapping("/viewPetitions")
+    public String viewPetitionsPage() {
+        return "viewPetitions";
+    }
 }
