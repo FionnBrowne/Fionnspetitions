@@ -6,8 +6,11 @@
 </head>
 <body>
 <h1>Matching petition</h1>
+<!-- Only shown if petition exists -->
 
 <div th:if="${petition != null}">
+    <!-- Display petition data -->
+
     <p>
         <b>ID:</b> <span th:text="${petition.petitionCreationId}"></span><br>
         <b>Created by:</b> <span th:text="${petition.petitionUserName}"></span><br>
@@ -26,10 +29,12 @@
 
         <button type="submit">Sign Petition</button>
     </form>
-
+    <!-- Success after signing -->
     <p style="color:green;">[[${message}]]</p>
 
     <h3>Signatures</h3>
+    <!-- List all signatures -->
+
     <ul>
         <th:block th:each="s : ${petition.signatures}">
             <li th:text="${s}"></li>

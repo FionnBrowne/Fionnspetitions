@@ -7,13 +7,15 @@
 </head>
 <body>
 <h1>Petitions searcher</h1>
-
+<!-- Form that sends the petition ID to search in the controller -->
 <form action="/search"  method="post">
     <label>Petition Search:</label>
     <input type="text" name="searchId"><br>
     <button type="submit">Search</button>
 
     <br>
+    <!-- Display error if no petition is found -->
+
     <p style="color:red;">[[${error}]]</p>
 
     <br>

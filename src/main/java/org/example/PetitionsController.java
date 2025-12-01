@@ -13,7 +13,7 @@ public class PetitionsController {
 
     // Store petitions in memory
     private List<Petition> petitions = new ArrayList<>();
-
+    //landing page
     @GetMapping("/")
     public String index(){
         return "index";
@@ -23,27 +23,29 @@ public class PetitionsController {
         return "index"; // Return index page on POST
     }
 
-
+    //search petition page
     @GetMapping("/search")
     public String searchPage() {
         return "search";
     }
     @PostMapping("/search")
     public String searchPetition(@RequestParam String searchId, Model model) {
-
+        //for loop to itterate through the list until it finds a match or none are foumd
         for (Petition p : petitions) {
             if (p.getPetitionCreationId().equalsIgnoreCase(searchId)) {
+                //TRUE -> display page
                 model.addAttribute("petition", p);
                 return "searchDisplay";   // show petition result
             }
         }
+        //no match found
         model.addAttribute("error", "No Petition with this ID was found.");
         return "search";
     }
 
     @GetMapping("/sign")
     public String signPetitionForm(@RequestParam String id, Model model) {
-
+        //Find the petition entered
         for (Petition p : petitions) {
             if (p.getPetitionCreationId().equalsIgnoreCase(id)) {
                 model.addAttribute("petition", p);
@@ -60,12 +62,12 @@ public class PetitionsController {
                                @RequestParam String signerName,
                                @RequestParam String signerEmail,
                                Model model) {
-
+        //find correct petition
         for (Petition p : petitions) {
             if (p.getPetitionCreationId().equalsIgnoreCase(id)) {
-
+                //add signature
                 p.addSignature(signerName, signerEmail);
-
+                //reload page
                 model.addAttribute("petition", p);
                 model.addAttribute("message", "Thank you for signing & joining the cause!");
                 return "searchDisplay";

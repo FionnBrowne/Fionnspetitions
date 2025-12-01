@@ -6,14 +6,18 @@
 </head>
 <body>
 <h1>Display petitions</h1>
+<!-- Loop over all petitions sent from controller -->
+
 <ul>
     <th:block th:each="p : ${petitions}">
         <li>
+            <!-- Show ID -->
+
             PETITION name:
             <b th:text="${p.petitionCreationId}"></b>
-            Signed PETITION name:
+            PETITION founder name:
             <span th:text="${p.petitionUserName}"></span>,
-            Signed Email:
+            PETITONS founder Email:
             <span th:text="${p.userEmail}"></span>
         </li>
     </th:block>
