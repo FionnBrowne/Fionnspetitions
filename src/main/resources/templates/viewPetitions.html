@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Running petitions</title>
 </head>
 <body>
 <h1>Display petitions</h1>
+<ul>
+    <th:block th:each="p : ${petitions}">
+        <li>
+            PETITION name:
+            <b th:text="${p.petitionCreationId}"></b>
+            Signed PETITION name:
+            <span th:text="${p.petitionUserName}"></span>,
+            Signed Email:
+            <span th:text="${p.userEmail}"></span>
+        </li>
+    </th:block>
+</ul>
 
+<br>
 
 
 

@@ -5,8 +5,15 @@ import	org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class PetitionsController {
+
+    // Store petitions in memory
+    private List<Petition> petitions = new ArrayList<>();
+
     @GetMapping("/")
     public String index(){
         return "index";
@@ -33,8 +40,24 @@ public class PetitionsController {
         return "createPetitions";
     }
 
+    // HANDLE the form submission
+    @PostMapping("/createPetitions")
+    public String createPetition(@RequestParam String petitionCreationId ,
+                                 @RequestParam String petitionUserName ,
+                                 @RequestParam String userEmail,
+                                 Model model) {
+
+        Petition p = new Petition(petitionCreationId , petitionUserName , userEmail );
+        petitions.add(p);
+
+        model.addAttribute("message", "Petition successfully created!");
+        return "createPetitions"; // reload page with success message
+    }
+
+//view all petitions
     @GetMapping("/viewPetitions")
-    public String viewPetitionsPage() {
+    public String viewPetitionsPage(Model model) {
+        model.addAttribute("petitions", petitions);//send list tp html page
         return "viewPetitions";
     }
     @GetMapping("/searchDisplay")
