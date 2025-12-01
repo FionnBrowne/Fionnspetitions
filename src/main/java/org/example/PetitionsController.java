@@ -11,8 +11,15 @@ import java.util.List;
 @Controller
 public class PetitionsController {
 
+
     // Store petitions in memory
     private List<Petition> petitions = new ArrayList<>();
+    //Populating sample petitions for project
+    public PetitionsController() {
+        petitions.add(new Petition("SaveTheForests", "Emma Green", "emma.green@example.com"));
+        petitions.add(new Petition("FreeSchoolLunches", "Mark Thompson", "mark.thompson@example.com"));
+        petitions.add(new Petition("CleanTheOceans", "Lily Waters", "lily.waters@example.com"));
+    }
     //landing page
     @GetMapping("/")
     public String index(){
