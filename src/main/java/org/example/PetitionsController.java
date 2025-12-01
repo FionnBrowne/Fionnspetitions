@@ -29,9 +29,50 @@ public class PetitionsController {
         return "search";
     }
     @PostMapping("/search")
-    public String searchPetition(@RequestParam String petitionName, Model model) {
-        // to search patitions TODO: search logic here
-        model.addAttribute("result", petitionName);
+    public String searchPetition(@RequestParam String searchId, Model model) {
+
+        for (Petition p : petitions) {
+            if (p.getPetitionCreationId().equalsIgnoreCase(searchId)) {
+                model.addAttribute("petition", p);
+                return "searchDisplay";   // show petition result
+            }
+        }
+        model.addAttribute("error", "No Petition with this ID was found.");
+        return "search";
+    }
+
+    @GetMapping("/sign")
+    public String signPetitionForm(@RequestParam String id, Model model) {
+
+        for (Petition p : petitions) {
+            if (p.getPetitionCreationId().equalsIgnoreCase(id)) {
+                model.addAttribute("petition", p);
+                return "signPetition";
+            }
+        }
+
+        model.addAttribute("error", "Petition not found.");
+        return "search";
+    }
+
+    @PostMapping("/sign")
+    public String signPetition(@RequestParam String id,
+                               @RequestParam String signerName,
+                               @RequestParam String signerEmail,
+                               Model model) {
+
+        for (Petition p : petitions) {
+            if (p.getPetitionCreationId().equalsIgnoreCase(id)) {
+
+                p.addSignature(signerName, signerEmail);
+
+                model.addAttribute("petition", p);
+                model.addAttribute("message", "Thank you for signing & joining the cause!");
+                return "searchDisplay";
+            }
+        }
+
+        model.addAttribute("error", "Petition not found.");
         return "search";
     }
 

@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Petition {
     //initialise & store variables
     private String petitionCreationId;
@@ -11,6 +14,17 @@ public class Petition {
         this.petitionUserName = petitionUserName;
         this.userEmail = userEmail;
     }
+
+    private List<String> signatures = new ArrayList<>();
+
+    public void addSignature(String name, String email) {
+        signatures.add(name + " (" + email + ")");
+    }
+
+    public List<String> getSignatures() {
+        return signatures;
+    }
+
 
     //read in Petition entered values
     public String getPetitionCreationId() {
